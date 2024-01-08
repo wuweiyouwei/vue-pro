@@ -10,8 +10,7 @@
       </tr>
       </thead>
       <tbody>
-        <BugItem v-for="bug of bugList" :key="bug.id" :bug="bug" :modifyResolvedCallback="modifyResolvedCallback"
-                 :deleteByIdCallback="deleteByIdCallback" :updateDescCallback="updateDescCallback"></BugItem>
+        <BugItem v-for="bug of bugList" :key="bug.id" :bug="bug"></BugItem>
       </tbody>
     </table>
   </div>
@@ -21,7 +20,7 @@
 import BugItem from "@/components/bug/BugItem";
 export default {
   name: 'BugList',
-  props : ['bugList', 'modifyResolvedCallback', 'deleteByIdCallback', 'selectAllCallback', 'updateDescCallback'],
+  props : ['bugList'],
   computed : {
     resolvedCount() {
       return this.bugList.reduce((a, b) => a + (b.resolved ? 1 : 0), 0)
@@ -36,7 +35,8 @@ export default {
       },
       // setter
       set(value) {
-        this.selectAllCallback(value)
+        // this.selectAllCallback(value)
+        this.$emit('selectAllCallback', value)
       }
     }
   },
@@ -44,6 +44,7 @@ export default {
     selectAll(e) {
         this.selectAllCallback(e.target.checked)
     }
+
   },
   components : {BugItem}
 }

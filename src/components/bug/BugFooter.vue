@@ -8,10 +8,12 @@
 <script>
 export default {
   name: 'BugFooter',
-  props: ['bugList', 'resolvedCallback'],
+  // props: ['bugList', 'resolvedCallback'],
+  props: ['bugList'],
   methods : {
     resolvedBug(){
-      this.resolvedCallback()
+      // this.resolvedCallback()
+      this.$emit('resolvedCallback')
     }
   },
   // 计算属性

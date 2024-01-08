@@ -1,10 +1,14 @@
 <template>
   <div>
-    <BugHeader :saveBugCallback="saveBugCallback"></BugHeader>
-    <BugList :bugList="bugList" :modifyResolvedCallback="modifyResolvedCallback"
-             :deleteByIdCallback="deleteByIdCallback" :selectAllCallback="selectAllCallback"
-             :updateDescCallback="updateDescCallback"></BugList>
-    <BugFooter :bugList="bugList" :resolvedCallback="resolvedCallback"></BugFooter>
+    <!--    <BugHeader :saveBugCallback="saveBugCallback"></BugHeader>-->
+    <!--    使用自定义事件 来实现子向父传递消息-->
+    <BugHeader @saveBugCallback="saveBugCallback"></BugHeader>
+
+    <BugList :bugList="bugList"
+             @selectAllCallback="selectAllCallback"></BugList>
+
+    <BugFooter :bugList="bugList"
+               @resolvedCallback="resolvedCallback"></BugFooter>
   </div>
 </template>
 <script>
@@ -16,6 +20,16 @@ import BugFooter from "@/components/bug/BugFooter";
 export default {
   name: 'App',
   components: {BugHeader, BugList, BugFooter},
+  mounted() {
+    // 绑定全局事件总线
+    this.$bus.$on('modifyResolvedCallback', this.modifyResolvedCallback)
+    this.$bus.$on('deleteByIdCallback', this.deleteByIdCallback)
+    this.$bus.$on('updateDescCallback', this.updateDescCallback)
+  },
+  beforeDestroy() {
+    // 在当前事件销毁之前，要手动解绑 绑定事件
+    this.$bus.off(['modifyResolvedCallback', 'deleteByIdCallback', 'updateDescCallback'])
+  },
   methods: {
     saveBugCallback(bug) {
       // 向bugList添加元素

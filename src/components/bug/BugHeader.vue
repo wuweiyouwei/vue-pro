@@ -15,14 +15,16 @@ export default {
       desc: ''
     }
   },
-  props: ['saveBugCallback'],
+  // props: ['saveBugCallback'],
   methods: {
     saveBug() {
       if (!this.desc.trim()) return
       // 创建 bug 对象
       let bugObj = {id: Date.now(), desc: this.desc, resolved: false}
       // 存储到数组中
-      this.saveBugCallback(bugObj)
+      // this.saveBugCallback(bugObj)
+      // 触发事件实现消息传送
+      this.$emit('saveBugCallback', bugObj)
       // 清空文本域
       this.desc = ''
     }
