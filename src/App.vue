@@ -1,21 +1,18 @@
 <template>
   <div>
-    <User></User>
+    <A></A>
     <hr>
-    <Vip></Vip>
-    <hr>
-    <Name></Name>
+    <B></B>
   </div>
 </template>
 
 <script>
-import User from './components/User'
-import Vip from './components/Vip'
-import Name from './components/Name'
+import A from './components/A'
+import B from './components/B'
 
 export default {
   name : 'App',
-  components : {User, Vip , Name}
+  components : {A, B}
 }
 </script>
 

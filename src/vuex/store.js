@@ -4,40 +4,56 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-const actions = {
-    saveUser(context, value) {
-        context.commit('SAVE_USER', value)
+const a = {
+    // 开启命名空间
+    namespaced : true,
+    actions : {
+        doA1() {
+            console.log('doA1 actions ...')
+        },
     },
-    saveVip(context, value) {
-        context.commit('SAVE_VIP', value)
-    }
-
-}
-const mutations = {
-    SAVE_USER(state, value) {
-        state.users.unshift(value)
+    mutations : {
+        DOA1() {
+            console.log('doA1 mutations ...')
+        }
     },
-    SAVE_VIP(state, value) {
-        state.vips.unshift(value)
-    }
-}
-const state = {
-    name: '',
-    users: [
-        {id: '001', name: '孙悟空'},
-        {id: '002', name: '猪八戒'},
-        {id: '003', name: '沙和尚'}
-    ],
-    vips: [
-        {id: '001', name: '高启盛'},
-        {id: '002', name: '高齐兰'},
-        {id: '003', name: '高启盛'}
-    ],
-}
-const getters = {
-    reversedName(state){
-        return state.name.split('').reverse().join('')
+    state : {
+        a : 1,
+    },
+    getters : {
+        computedA1(){
+            return 1
+        }
     }
 }
 
-export default new Vuex.Store({actions, mutations, state, getters})
+const b = {
+    // 开启命名空间
+    namespaced : true,
+    actions : {
+        doB1() {
+            console.log('doB1 actions ...')
+        },
+    },
+    mutations : {
+        DOB1() {
+            console.log('doB1 mutations ...')
+        }
+    },
+    state : {
+        b : 1,
+    },
+    getters : {
+        computedB1(){
+            return 1
+        }
+    }
+}
+
+
+export default new Vuex.Store({
+    modules : {
+        aModule : a,
+        bModule : b
+    }
+})
