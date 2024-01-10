@@ -1,4 +1,3 @@
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -6,7 +5,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const actions = {
-    saveUser(context, value){
+    saveUser(context, value) {
         context.commit('SAVE_USER', value)
     },
     saveVip(context, value) {
@@ -23,6 +22,7 @@ const mutations = {
     }
 }
 const state = {
+    username: '',
     users: [
         {id: '001', name: '孙悟空'},
         {id: '002', name: '猪八戒'},
@@ -34,5 +34,10 @@ const state = {
         {id: '003', name: '高启盛'}
     ],
 }
+const getters = {
+    reversedName(state){
+        return state.username.split('').reverse().join('')
+    }
+}
 
-export default new Vuex.Store({actions, mutations, state})
+export default new Vuex.Store({actions, mutations, state, getters})
