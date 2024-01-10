@@ -22,7 +22,7 @@ const mutations = {
     }
 }
 const state = {
-    username: '',
+    name: '',
     users: [
         {id: '001', name: '孙悟空'},
         {id: '002', name: '猪八戒'},
@@ -36,7 +36,7 @@ const state = {
 }
 const getters = {
     reversedName(state){
-        return state.username.split('').reverse().join('')
+        return state.name.split('').reverse().join('')
     }
 }
 
